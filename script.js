@@ -14,7 +14,6 @@ const dolar = data.USDBRL.high
 const euro = data.EURBRL.high
 const bitcoin = data.BTCBRL.high
 
-console.log(data)
 
     if (segundoSelect.value == "dolar") {
         valorConvertido.innerHTML = new Intl.NumberFormat("en-US", {
