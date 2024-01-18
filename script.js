@@ -3,46 +3,40 @@ const segundoSelect = document.querySelector(".segundo-select")
 const primeiroSelect = document.querySelector(".primeiro-select")
 
 
-
-function convertValues() {
+async function convertValues ()  {
     const inputValue = document.querySelector(".input-value").value
     const valoraConverter = document.querySelector(".valor-a-converter")
     const valorConvertido = document.querySelector(".valor-convertido")
 
-    console.log(segundoSelect.value)
+const data = await fetch("https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL,BTC-BRL").then(response => response.json())
 
-    const dolarToday = 5.2
-    const euroToday = 6.2
-    const libraToday = 7.5
-    const bitcoinToday = 8.5
+const dolar = data.USDBRL.high
+const euro = data.EURBRL.high
+const bitcoin = data.BTCBRL.high
 
+console.log(data)
 
     if (segundoSelect.value == "dolar") {
         valorConvertido.innerHTML = new Intl.NumberFormat("en-US", {
             style: "currency",
             currency: "USS"
-        }).format(inputValue / dolarToday)
+        }).format(inputValue / dolar)
     }
 
     if (segundoSelect.value == "euro") {
         valorConvertido.innerHTML = new Intl.NumberFormat("en-DE", {
             style: "currency",
             currency: "EUR"
-        }).format(inputValue / euroToday)
+        }).format(inputValue / euro)
     }
 
-    if (segundoSelect.value == "libra") {
-        valorConvertido.innerHTML = new Intl.NumberFormat("en-GB", {
-            style: "currency",
-            currency: "GBT"
-        }).format(inputValue / libraToday)
-    }
     if (segundoSelect.value == "bitcoin") {
         valorConvertido.innerHTML = new Intl.NumberFormat("de-DE", {
             style: "currency",
             currency: "BCT"
-        }).format(inputValue / bitcoinToday)
+        }).format(inputValue / bitcoin)
     }
+
     if (segundoSelect.value == "real") {
         valorConvertido.innerHTML = new Intl.NumberFormat("pt-BR", {
             style: "currency",
@@ -105,11 +99,7 @@ function change() {
         imgCurrency.src = "./assets/euro.png"
 
     }
-    if (segundoSelect.value == "libra") {
-        nameSecondCurrency.innerHTML = "Libra"
-        imgCurrency.src = "./assets/libra 1.png"
-
-    }
+   
     if (segundoSelect.value == "bitcoin") {
         nameSecondCurrency.innerHTML = "Bitcoin"
         imgCurrency.src = "./assets/bitcoin 1.png"
